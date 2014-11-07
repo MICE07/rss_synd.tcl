@@ -3,5 +3,6 @@ rss_synd.tcl
 
 Rss Tcl script
 
-prerequisites
+prerequisites:
+
 apt-get install tcl-tls
