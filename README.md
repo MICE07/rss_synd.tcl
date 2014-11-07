@@ -6,8 +6,8 @@
 INSTALL
 ================================================================================
 
-  1. Copy rss-synd.tcl and rss-synd-settings.tcl to your scripts directory.
-  2. Add "source scripts/rss-synd.tcl" to your eggdrop.conf file.
+1. Copy rss-synd.tcl and rss-synd-settings.tcl to your scripts directory.
+2. Add "source scripts/rss-synd.tcl" to your eggdrop.conf file.
 
 Dependencies (for additional features)
 
