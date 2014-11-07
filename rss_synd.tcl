@@ -1,30 +1,6 @@
 # -*- tab-width: 4; indent-tabs-mode: t; -*-
 # rss-synd.tcl -- 0.5.1
-#
-#   Highly configurable asynchronous RSS & Atom feed reader for Eggdrops 
-#     written in TCL. Supports multiple feeds, gzip compressed feeds,
-#     automatically messaging channels with updates at set intervals,
-#     custom private/channel triggers and more.
-#
-# Copyright (c) 2011 Andrew Scott, HM2K
-#
-# Name: RSS & Atom Syndication Script for Eggdrop
-# Author: Andrew Scott <andrew.scott@wizzer-it.com>
-# Author: HM2K <irc@hm2k.org>
-# License: See LICENSE file
-# Link: http://code.google.com/p/rss-synd/
-# Tags: rss, atom, syndication
-# Updated: 05-Jan-2011
-#
-###Usage
-# See README file
-#
-###Revisions
-# See HISTORY file
 
-#
-# Include Settings
-#
 if {[catch {source scripts/rss-synd-settings.tcl} err]} {
   putlog "Error: Could not load 'rss-synd-settings.tcl file.'";
 }
