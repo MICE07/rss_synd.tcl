@@ -1,8 +1,143 @@
-rss_synd.tcl
-============
+################################################################################
+  README
+################################################################################
 
-Rss Tcl script
+================================================================================
+INSTALL
+================================================================================
 
-prerequisites:
+  1. Copy rss-synd.tcl and rss-synd-settings.tcl to your scripts directory.
+  2. Add "source scripts/rss-synd.tcl" to your eggdrop.conf file.
 
-apt-get install tcl-tls
+Dependencies (for additional features)
+
+ This script will run perfectly fine without any of these dependencies, but
+  if you want any of these features you'll need to download and install the
+  respective package(s).
+
+* HTTP Authorisation
+** Requires: base64 package from tcllib to be installed.
+** URL: http://tcllib.sourceforge.net/
+** FreeBSD: cd /usr/ports/devel/tcllib/ && make install clean
+** RedHat: yum install tcllib
+
+* HTTPS
+** Requires: TLS package to be installed.
+** URL: http://www.sensus.org/tcl/
+** FreeBSD: cd /usr/ports/devel/tcltls/ && make install clean
+
+* Gzip Decompression:
+** Requires: Trf package to be installed.
+** URL: http://tcltrf.sourceforge.net/
+** FreeBSD: cd /usr/ports/devel/tcl-trf/ && make install clean
+** RedHat: yum install tcl-trf
+
+================================================================================
+SETTINGS
+================================================================================
+
+ Follow the details below. It is possible to define values in either the
+  default variable or within the individual rss feed variables. You can define
+  values in both places, but each feeds individual settings will overwrite the
+  default ones.
+
+Required values:
+
+url             The URL of the RSS/ATOM feed.
+                 Example: http://www.example.tld/feed.xml
+                          https://www.example.tld/feed.xml
+                          http://username:password@www.example.tld/feed.xml
+
+channels        List of channels the feed (and trigger) are to be active in.
+                  (Use space to separate multiple channels)
+
+database        Full (or relative from your eggdrops path) path to where you
+                  want to store the database file.
+                 Example: ./scripts/feedname.db
+
+output           The format you would like the RSS to be outputted to you
+                  channel in.
+
+max-depth        Maximum amount of times the script should follow Location:
+                  headers. Keep this relatively low.
+                 Default: 5
+
+timeout          Timeout of connections (in milliseconds).
+                 Default: 60000
+
+user-agent       User agent to send in the http request.
+
+announce-type    How you want the announce updates to be sent to your
+                  channels.
+                  Options:
+                   0 = Message Channel
+                   1 = Notice Channel
+                 Default: 0
+
+announce-output  Maximum articles to output to channel on announce. Setting this
+                  to 0 will silence the automatic output.
+                 Default: 3
+
+trigger-type     How you want the trigger replies to be sent when triggered
+                  both in channel and via private message.
+                  The format is: <channel>:<privmsg>
+                  Options:
+                   0 = Message Channel
+                   1 = Notice Channel
+                   2 = Message User
+                   3 = Notice User
+                 Default: 0:2
+
+trigger-output   Maximum articles to output when triggered. Setting this to 0 will
+                  silence the trigger output.
+                 Default: 3
+
+update-interval  How often (in minutes) you want the feed to be checked. Try
+                  and keep this number sensible, something above 15 minutes.
+                  Some websites will ban you for hammering their feeds.
+                 Default: 30
+
+Optional values:
+
+trigger          Public trigger to list feeds. (if you only want to define it
+                  once in default use @@feedid@@, this will be replaced by
+                  each individual feeds id)
+
+evaluate-tcl     Evaluate the output before sending it to channel.
+                 Default: 0 (Off)
+
+enable-gzip      Enable gzip decompression for this feed.
+                 Default: 0 (Off)
+
+remove-empty     Remove empty cookies from the output.
+                 Default: 1 (On)
+
+output-order     The order you want the articles to be announced in channel.
+                 Options:
+                  0 = Ascending (Oldest -> Newest)
+                  1 = Descending (Newest -> Oldest)
+
+charset          This is the charset you want the feed to be outputted using.
+                  The default charset is what your local system charset is set
+                  to use. In most cases, if you're having problems with output
+                  just use utf-8.
+                 Example: utf-8
+                          cp1251
+                          iso8859-1
+feedencoding 	This is the charset the feed is in. (look in the sourcecode 
+                it is usualy mentioned in the <?xml> header. Please note that
+				Tcl uses other encoding names, esp. the Windows-xxx encodings.
+				In Tcl they are named cpxxx.
+
+Cookies:
+
+  Output works on a cookie system, in this case its dynamic so it depends on
+   what data the feed contains as to what you can output.
+
+  As of version 0.3 you are able to reference any tag within each article, or
+   if you really want the whole feed. The format is @@<tag>!<subtag>!...@@,
+   @@item@@ and @@entry@@ cookies are 'shortcuts' and will always point to the
+   current article. If you wish to output an attribute of a tag you can do that
+   by using the attribute name with an = in front of it
+   (eg: @@entry!link!=href@@). This would get the 'href' attribute from the
+   <link> tag. Refer to rss-synd.tcl for more examples.
