@@ -12,7 +12,7 @@ namespace eval ::rss-synd {
 
 
 
-		set rss(ncsc) {
+set rss(ncsc) {
 		"url"			"https://www.ncsc.nl/rss/beveiligingsadviezen"
 		"channels"		"#RssFeeds"
 		"database"		"/home/pho3nix/irc/bots/rssfeeds/db/ncsc.db"
@@ -24,7 +24,7 @@ namespace eval ::rss-synd {
 		"output-order"	0
 	}
 
-	set rss(automatiseringgids) {
+set rss(automatiseringgids) {
 		"url"			"http://www.automatiseringgids.nl/rssfeed/artikelen"
 		"channels"		"#RssFeeds"
 		"database"		"/home/pho3nix/irc/bots/rssfeeds/db/automatiseringgids.db"
@@ -48,7 +48,7 @@ set rss(tweakers) {
 		"output-order"	0
 	}
 	
-	set rss(security) {
+set rss(security) {
 		"url"			"https://www.security.nl/rss/headlines.xml"
 		"channels"		"#RssFeeds"
 		"database"		"/home/pho3nix/irc/bots/rssfeeds/db/security.db"
@@ -253,7 +253,7 @@ set rss(msbulletins) {
 		"channels"			"#RssFeeds"
 		"trigger"			"!rss @@feedid@@"
 		"output"			"\[\002@@channel!title@@@@title@@\002\] @@item!title@@@@entry!title@@ - @@item!link@@@@entry!link!=href@@"
-		"user-agent"		"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2"
+		"user-agent"			"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2"
 	}
 }
 
