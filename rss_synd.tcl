@@ -266,7 +266,7 @@ proc ::rss-synd::feed_get {args} {
 				lappend feed(headers) "Accept-Encoding" "gzip"
 			}
 
-			catch {::http::geturl "$feed(url)" -command "[namespace current]::feed_callback {[array get feed] depth 0}" -timeout $feed(timeout) -headers $feed(headers)} debug
+			catch {::http::geturl package require zlib "$feed(url)" -command "[namespace current]::feed_callback {[array get feed] depth 0}" -timeout $feed(timeout) -headers $feed(headers)} debug
 
 			set feed(updated) [unixtime]
 			set rss($name) [array get feed]
